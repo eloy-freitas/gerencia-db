@@ -1,13 +1,11 @@
 CREATE database aula_trigger;
-
-DROP database aula_trigger;
 use aula_trigger;
 
 CREATE TABLE Cidade
 (
-	CodCidade	INTEGER NOT NULL,	
-	Nome		VARCHAR(100) NOT NULL,
-	UF		CHAR(2),
+	CodCidade INTEGER NOT NULL,	
+	Nome VARCHAR(100) NOT NULL,
+	UF	CHAR(2),
 	CONSTRAINT pkCidade PRIMARY KEY (CodCidade)
 );
 
@@ -165,63 +163,44 @@ INSERT INTO Produto (CodProduto, Descricao, Estoque) VALUES (19, 'Biscoito Água
 INSERT INTO Produto (CodProduto, Descricao, Estoque) VALUES (20, 'Embapanado Sadia', 0);
 
 DROP table Produto ;
+DROP DATABASE aula_trigger;
 
 INSERT INTO Requisicao (CodRequisicao, CodFornecedor, `Data`, ValorTotal)
-VALUES (1, 1, now(), 650);
+VALUES (1, 1, now(), 0);
 
 INSERT INTO Requisicao (CodRequisicao, CodFornecedor, `Data`, ValorTotal)
-VALUES (3, 1, now(), 1000);
+VALUES (2, 2, now(), 0);
 
 INSERT INTO ItemRequisicao (CodRequisicao, CodProduto, Quantidade, ValorUnitario)
-VALUES (1, 3, 100, 5.50);
-
-INSERT INTO Requisicao (CodRequisicao, CodFornecedor, `Data`, ValorTotal)
-VALUES (10, 1, now(), 800);
+VALUES (1, 1, 50, 5);
 
 INSERT INTO ItemRequisicao (CodRequisicao, CodProduto, Quantidade, ValorUnitario)
-VALUES (3, 1, 150, 5.50);
+VALUES (2, 10, 30, 10);
 
-INSERT INTO ItemRequisicao (CodRequisicao, CodProduto, Quantidade, ValorUnitario)
-VALUES (10, 2, 10, 5);
 
-INSERT INTO ItemRequisicao (CodRequisicao, CodProduto, Quantidade, ValorUnitario)
-VALUES (10, 2, 100, 10);
-
-DELETE FROM ItemRequisicao WHERE CodRequisicao = 10 AND CodProduto = 2;
-
-DELETE FROM Historico WHERE Documento = 1;
+DELETE FROM ItemRequisicao WHERE CodRequisicao = 2;
 
 UPDATE ItemRequisicao ir
-SET ir.Quantidade = 20
-WHERE ir.CodRequisicao = 9 AND CodProduto = 1;
+SET ir.Quantidade = 100
+WHERE ir.CodRequisicao = 1 AND CodProduto = 1;
 
 DELETE FROM ItemRequisicao WHERE CodRequisicao = 1;
 
 INSERT INTO Pedido (CodPedido, CodCliente, `Data`, ValorTotal, NumParcelas)
-VALUES (2, 1, now(), 100, 0);
+VALUES (1, 1, now(), 0, 0);
 
 INSERT INTO Pedido (CodPedido, CodCliente, `Data`, ValorTotal, NumParcelas)
-VALUES (3, 1, now(), 100, 0);
-
-INSERT INTO Pedido (CodPedido, CodCliente, `Data`, ValorTotal, NumParcelas)
-VALUES (4, 1, now(), 100, 0);
-
-INSERT INTO Pedido (CodPedido, CodCliente, `Data`, ValorTotal, NumParcelas)
-VALUES (5, 1, now(), 100, 0);
+VALUES (2, 2, now(), 0, 0);
 
 INSERT INTO ItemPedido (CodPedido, CodProduto, Quantidade, ValorUnitario)
-VALUES(2, 3, 30, 3.2);
+VALUES(1, 1, 20, 6);
 
 INSERT INTO ItemPedido (CodPedido, CodProduto, Quantidade, ValorUnitario)
-VALUES(4, 3, 20, 3.2);
-
-INSERT INTO ItemPedido (CodPedido, CodProduto, Quantidade, ValorUnitario)
-VALUES(5, 3, 20, 3.2);
-
+VALUES(2, 10, 5, 15);
 
 UPDATE ItemPedido ip 
 SET ip.Quantidade = 10
-WHERE ip.CodPedido = 5;
+WHERE ip.CodPedido = 2;
 
-DELETE FROM ItemPedido WHERE CodPedido = 5;
+DELETE FROM ItemPedido WHERE CodPedido = 2;
 SELECT DISTINCT * FROM Historico h ;
