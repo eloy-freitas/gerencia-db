@@ -140,4 +140,60 @@ BEGIN
 END;
 |
 
+DELIMITER |
+CREATE TRIGGER tInsertNumPartidas
+AFTER INSERT ON Partida
+FOR EACH ROW 
+BEGIN 
+	UPDATE Estadio e 
+	SET e.NumPartidas = e.Numpartidas + 1
+	WHERE NEW.CodEstadio = e.CodEstadio;
+END;
+|
+
+
+DELIMITER |
+CREATE TRIGGER tUpdateNumPartidas
+AFTER UPDATE ON Partida
+FOR EACH ROW 
+BEGIN 
+	UPDATE Estadio e 
+	SET e.NumPartidas = e.Numpartidas - 1
+	WHERE OLD.CodEstadio = e.CodEstadio;
+	
+	UPDATE Estadio e 
+	SET e.NumPartidas = e.Numpartidas + 1
+	WHERE NEW.CodEstadio = e.CodEstadio;
+END
+| 
+
+DELIMITER |
+CREATE TRIGGER tDeleteNumPartidas
+BEFORE DELETE ON Partida
+FOR EACH ROW 
+BEGIN 
+	UPDATE Estadio e 
+	SET e.NumPartidas = e.Numpartidas - 1
+	WHERE OLD.CodEstadio = e.CodEstadio;
+END
+|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 DROP TRIGGER  tInsertPartida;

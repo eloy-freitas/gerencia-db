@@ -68,6 +68,8 @@ CREATE TABLE Estadio
 	CONSTRAINT fkEstadioCidade FOREIGN KEY (CodCidade) REFERENCES Cidade(CodCidade)
 );
 
+ALTER TABLE Estadio ADD COLUMN NumPartidas INTEGER NOT NULL;
+
 CREATE TABLE Partida
 (
 	CodCampeonato	INTEGER NOT NULL,
@@ -90,8 +92,11 @@ INSERT INTO Cidade (CodCidade, Nome, UF) VALUES
 (1, 'Linhares', 'E'),
 (2, 'Vitória', 'E');
 
-INSERT INTO Estadio (CodEstadio, Nome, CodCidade, Capacidade)
-VALUES (1, 'Clube do América', 1, 60000);
+INSERT INTO Estadio (CodEstadio, Nome, CodCidade, Capacidade, NumPartidas)
+VALUES (1, 'Clube do América', 1, 60000, 0);
+
+INSERT INTO Estadio (CodEstadio, Nome, CodCidade, Capacidade, NumPartidas)
+VALUES (2, 'Mestre Alvaro', 2, 100000, 0);
 
 INSERT INTO Clube (CodClube, Nome, CodCidade) VALUES 
 (1, 'Linhares esporte clube', 1),
@@ -121,8 +126,13 @@ INSERT INTO Partida
 VALUES
 (1, 2021, 3, now(), 1, 1, 1, 2, 2);
 
-DELETE FROM Partida WHERE CodPartida = 2;
+INSERT INTO Partida 
+(CodCampeonato, Ano, CodPartida, DataHora, CodEstadio, CodClube1, GolsClube1, CodClube2, GolsClube2)
+VALUES
+(1, 2021, 4, now(), 1, 1, 3, 2, 1);
+
+DELETE FROM Partida WHERE CodPartida = 4;
 
 UPDATE Partida 
-SET GolsClube2 = 1
-WHERE CodPartida = 3;
+SET CodEstadio = 2
+WHERE CodPartida = 4;
