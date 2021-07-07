@@ -136,3 +136,23 @@ DELETE FROM Partida WHERE CodPartida = 4;
 UPDATE Partida 
 SET CodEstadio = 2
 WHERE CodPartida = 4;
+
+
+INSERT into Jogador (CodJogador, Nome, DataNascimento, ValorPasse)
+VALUES 
+(1, 'Etevaldo', now(), 1000),
+(2, 'Garibaldo', now(), 2000),
+(3, 'G0rdox', now(), 5000),
+(4, 'Pesado', now(), 10000);
+
+
+INSERT INTO JogadorClubeCampeonato (CodClube, CodCampeonato, Ano, CodJogador, Gols)
+VALUES
+(1, 1, 2021, 1, 3),
+(1, 1, 2021, 2, 0),
+(2, 1, 2021, 3, 18),
+(2, 1, 2021, 4, 23);
+
+UPDATE JogadorClubeCampeonato 
+SET Gols = 0
+WHERE CodJogador = 2;
