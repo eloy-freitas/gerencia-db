@@ -88,6 +88,19 @@ CREATE TABLE Partida
 	CONSTRAINT fkPartidaClube2	FOREIGN KEY (CodClube2) REFERENCES Clube(CodClube)
 );
 
+CREATE TABLE Rodada (
+	CodRodada INTEGER DEFAULT 0 NOT NULL,
+	CodPartida	INTEGER NOT NULL,
+	DataRodada DATE NOT NULL,
+	CodCampeonato INTEGER NOT NULL,
+	CONSTRAINT fkCampeonato FOREIGN KEY (CodCampeonato) REFERENCES Campeonato(CodCampeonato)
+);
+DROP table Rodada;
+
+SELECT DATE(now());
+
+SELECT CodPartida from Partida p ;
+SHOW FULL COLUMNS FROM Partida ;
 INSERT INTO Cidade (CodCidade, Nome, UF) VALUES 
 (1, 'Linhares', 'E'),
 (2, 'Vitória', 'E');
