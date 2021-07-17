@@ -123,18 +123,38 @@ GRANT SELECT ON view_empregado_e TO 'E'@'localhost';
 GRANT UPDATE(PNome) ON empresa.EMPREGADO TO 'A'@'localhost';
 
 #Questão 2
-GRANT SELECT, INSERT, UPDATE, DELETE escola.Grade TO 'Coordenador'@'localhost';
-GRANT SELECT, INSERT, UPDATE, DELETE escola.Disciplina TO 'Coordenador'@'localhost';
-GRANT SELECT, INSERT, UPDATE, DELETE escola.Turma TO 'Coordenador'@'localhost';
-GRANT SELECT, INSERT, UPDATE, DELETE escola.Oferta TO 'Coordenador'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON escola.Grade TO 'Coordenador'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON escola.Disciplina TO 'Coordenador'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON escola.Turma TO 'Coordenador'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON escola.Oferta TO 'Coordenador'@'localhost';
 
-GRANT SELECT escola.Professor TO 'Professor'@'localhost';
-GRANT SELECT escola.Turma TO 'Professor'@'localhost';
-GRANT SELECT escola.Matricula TO 'Professor'@'localhost';
-GRANT UPDATE(Email, Telefone) ON escola.Professor TO 'Professor'@'localhost';
+GRANT SELECT ON escola.Professor TO 'Professor'@'localhost';
+GRANT SELECT ON escola.Turma TO 'Professor'@'localhost';
+GRANT SELECT ON escola.Matricula TO 'Professor'@'localhost';
+GRANT UPDATE ON (Email, Telefone) ON escola.Professor TO 'Professor'@'localhost';
 
-GRANT SELECT escola.Aluno TO 'Aluno'@'localhost';
-GRANT SELECT escola.Avaliacao TO 'Aluno'@'localhost';
-GRANT SELECT escola.Matricula TO 'Aluno'@'localhost';
-GRANT SELECT escola.Turma TO 'Aluno'@'localhost';
+GRANT SELECT ON escola.Aluno TO 'Aluno'@'localhost';
+GRANT SELECT ON escola.Avaliacao TO 'Aluno'@'localhost';
+GRANT SELECT ON escola.Matricula TO 'Aluno'@'localhost';
+GRANT SELECT ON escola.Turma TO 'Aluno'@'localhost';
 
+#Questão 3
+
+#a)
+CREATE VIEW vwNomeFuncionario
+AS SELECT f.nomeFunc FROM Funcionario f;
+
+CREATE VIEW vwInfoDepto
+AS SELECT f.dpto, f.salario FROM Funcionario f;
+
+#b
+GRANT SELECT ON vwInfoDepto TO 'user'@'localhost';
+
+GRANT SELECT ON vwNomeFuncionario TO 'secretario'@'localhost' WITH GRANT OPTION;
+
+#c
+#Os privilégios de Marta também são revogados
+
+#d
+GRANT SELECT, UPDATE ON Funcionario TO 'Helder'@'localhost' WITH GRANT OPTION;
+GRANT SELECT, UPDATE ON vwNomeFuncionario TO 'Helder'@'localhost' WITH GRANT OPTION;
